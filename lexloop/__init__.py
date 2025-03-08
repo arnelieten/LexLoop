@@ -7,7 +7,7 @@ def create_app(test_config=None):
     app.config.from_mapping(
         SECRET_KEY='dev', #set to api or randdom key when deploying & set config.py file
         DATABASE=os.path.join(app.instance_path, 'lexloop.sqlite'),
-        UPLOADS=os.path.join(app.instance_path, 'uploads',),
+        UPLOADS=os.path.join(app.instance_path, 'uploads'),
         MAX_CONTENT_LENGTH = 100 * 1024 * 1024
     )
 
@@ -34,7 +34,6 @@ def create_app(test_config=None):
 
     from . import interface
     app.register_blueprint(interface.bp)
-    app.add_url_rule('/', endpoint='index')
     
     from . import upload
     app.register_blueprint(upload.bp)
