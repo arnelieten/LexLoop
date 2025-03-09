@@ -6,12 +6,11 @@ from lexloop.auth import login_required
 
 bp = Blueprint('uploads', __name__, url_prefix='/uploads')
 
-ALLOWED_EXTENSIONS = {'txt', 'pdf', '.docx', '.doc'}
+allowed_extensions = {'txt', 'pdf', '.docx'}
 
 
 def allowed_file(filename):
-    return '.' in filename and \
-           filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+    return '.' in filename and filename.rsplit('.', 1)[1].lower() in allowed_extensions
 
 
 @bp.route('/', methods=['GET', 'POST'])

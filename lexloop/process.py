@@ -1,5 +1,5 @@
 import os
-import fitz  # PyMuPDF
+import fitz
 import spacy
 import re
 import pandas as pd
