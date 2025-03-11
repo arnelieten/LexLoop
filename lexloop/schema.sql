@@ -1,7 +1,7 @@
 DROP TABLE IF EXISTS user;
 DROP TABLE IF EXISTS post;
 DROP TABLE IF EXISTS dictionary;
-DROP TABLE IF EXISTS interface;
+DROP TABLE IF EXISTS dashboard;
 
 PRAGMA foreign_keys = ON;
 
@@ -28,9 +28,9 @@ CREATE TABLE dictionary (
   english_word TEXT NOT NULL
 );
 
-CREATE TABLE interface (
-  status_word TEXT NOT NULL,
-  switch_date TIMESTAMP NOT NULL,
+CREATE TABLE dashboard (
+  status_word TEXT NOT NUll,
+  switch_date TIMESTAMP,
   user_id INTEGER,
   dictionary_id INTEGER,
   PRIMARY KEY (user_id, dictionary_id),

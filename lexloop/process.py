@@ -2,16 +2,21 @@ import os
 import fitz
 import spacy
 import re
-import pandas as pd
 from transformers import pipeline
-from flask import Blueprint, request, flash, redirect, url_for, send_from_directory, current_app
+from flask import Blueprint, request, session, flash, redirect, url_for, send_from_directory, current_app, render_template
 from lexloop.auth import login_required
+from lexloop.db import get_db
 
 bp = Blueprint('process', __name__, url_prefix='/process')
 
 @bp.route('/<filename>', methods=['GET'])
 @login_required
 def process_file(filename):
+    user_id = session.get('user_id')
+    if not user_id:
+        flash("User not authenticated!")
+        return redirect(url_for('auth.login'))
+
     file_path = os.path.join(current_app.config['UPLOADS'], filename)
 
     if not os.path.exists(file_path):
@@ -38,15 +43,38 @@ def process_file(filename):
     translation_pipeline = pipeline('translation_fr_to_en', model='Helsinki-NLP/opus-mt-tc-big-fr-en')
     list_english = [translation_pipeline(word, return_text=True)[0]['translation_text'] for word in list_french]
 
-    #dataframe best solution here? do not use!
-    df = pd.DataFrame({"French": list_french, "English": list_english})
-    df = df[(df['French'] != df['English']) & (df['French'].str.len() >= 3)]
-    df = df.dropna().replace('', float('nan')).dropna()
-    df = df.sample(frac=1)
 
-    # create way to store in databases!
-    excel_path = os.path.join(current_app.config['UPLOADS'], f"{filename}.xlsx")
-    df.to_excel(excel_path, index=False)
+    initial_dictionary = dict(zip(list_french, list_english))
 
-    flash(f'Processing complete! Download your file: {filename}.xlsx')
-    return send_from_directory(current_app.config['UPLOADS'], f"{filename}.xlsx", as_attachment=True)
+    list_dictionary = {
+        french.lower(): english.lower()
+        for french, english in initial_dictionary.items()
+        if french.strip() and english.strip()
+        and len(french) >= 5 
+        and french.lower() != english.lower()
+    }
+
+    db = get_db()
+
+    for french_word, english_word in list_dictionary.items():
+        cursor = db.execute("SELECT id FROM dictionary WHERE french_word = ?", (french_word,))
+        row = cursor.fetchone()
+
+        if row:
+            dictionary_id = row["id"]
+        else:
+            cursor = db.execute('''
+                INSERT INTO dictionary (french_word, english_word)
+                VALUES (?, ?)
+            ''', (french_word, english_word))
+            db.commit()
+            dictionary_id = cursor.lastrowid
+
+        db.execute('''
+            INSERT OR IGNORE INTO dashboard (user_id, dictionary_id, status_word, switch_date)
+            VALUES (?, ?, 'new', NULL)
+        ''', (user_id, dictionary_id))
+
+    db.commit()
+
+    return render_template('auth/register.html')
