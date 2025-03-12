@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block header %}
+  <h1>{% block title %}Dashboard{% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+  {% if words %}
+    <table>
+      <thead>
+        <tr>
+          <th>French Word</th>
+          <th>English Word</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for word in words %}
+          <tr>
+            <td>{{ word['french_word'] }}</td>
+            <td>{{ word['english_word'] }}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  {% else %}
+    <p>No words available.</p>
+  {% endif %}
+{% endblock %}
