@@ -30,9 +30,6 @@ def create_app(test_config=None):
 
     from . import auth
     app.register_blueprint(auth.bp) 
-
-    from . import interface
-    app.register_blueprint(interface.bp)
     
     from . import upload
     app.register_blueprint(upload.bp)
