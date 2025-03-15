@@ -1,0 +1,129 @@
+{% extends 'base.html' %}
+
+{% block header %}
+  <h1>{% block title %}Flashcards{% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+  <div class="flashcard-container">
+    {% if words %}
+      <div class="flashcard-count">Card <span id="current-card">1</span> of <span id="total-cards">{{ words|length }}</span></div>
+      
+      <div id="flashcards-wrapper">
+        {% for word in words %}
+          <div class="flashcard" id="card-{{ loop.index0 }}" {% if not loop.first %}style="display: none;"{% endif %} data-id="{{ word.id }}">
+            <div class="flashcard-inner">
+
+              <div class="flashcard-front">
+                <button class="mark-known-btn" onclick="markKnown({{ word.id }}, {{ loop.index0 }})">✓</button>
+                <div class="word french-word">{{ word.french_word }}</div>
+                <div class="navigation-controls">
+                  <button class="nav-btn prev-btn" onclick="prevCard()">←</button>
+                  <button class="flip-btn" onclick="flipCard(this)">Flip</button>
+                  <button class="nav-btn next-btn" onclick="nextCard()">→</button>
+                </div>
+              </div>
+
+              <div class="flashcard-back">
+                <button class="mark-known-btn" onclick="markKnown({{ word.id }}, {{ loop.index0 }})">✓</button>
+                <div class="word english-word">{{ word.english_word }}</div>
+                <div class="navigation-controls">
+                  <button class="nav-btn prev-btn" onclick="prevCard()">←</button>
+                  <button class="flip-btn" onclick="flipCard(this)">Flip</button>
+                  <button class="nav-btn next-btn" onclick="nextCard()">→</button>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    {% else %}
+      <p>No flashcards available. Add some words to your dictionary first.</p>
+      <a href="{{ url_for('dashboard.display') }}">Return to Dashboard</a>
+    {% endif %}
+  </div>
+
+
+
+  
+  <script>
+    let cards = [
+      {% for word in words %}
+        {
+          id: {{ word.id }},
+          index: {{ loop.index0 }},
+          french: "{{ word.french_word }}",
+          english: "{{ word.english_word }}"
+        }{% if not loop.last %},{% endif %}
+      {% endfor %}
+    ];
+    
+    let currentCardIndex = 0;
+    let remainingCards = cards.length;
+    
+    function flipCard(button) {
+      const card = button.closest('.flashcard').querySelector('.flashcard-inner');
+      card.classList.toggle('flipped');
+    }
+    
+    function updateCardDisplay() {
+      document.querySelectorAll('.flashcard').forEach(card => {
+        card.style.display = 'none';
+      });
+      
+      if (remainingCards <= 0) {
+        window.location.href = "{{ url_for('flashcards.display') }}";
+        return;
+      }
+      
+      const currentCard = document.getElementById(`card-${cards[currentCardIndex].index}`);
+      if (currentCard) {
+        currentCard.style.display = 'block';
+        
+        const cardInner = currentCard.querySelector('.flashcard-inner');
+        cardInner.classList.remove('flipped');
+        
+        document.getElementById('current-card').textContent = currentCardIndex + 1;
+        document.getElementById('total-cards').textContent = remainingCards;
+      }
+    }
+    
+    function nextCard() {
+      currentCardIndex = (currentCardIndex + 1) % remainingCards;
+      updateCardDisplay();
+    }
+    
+    function prevCard() {
+      currentCardIndex = (currentCardIndex - 1 + remainingCards) % remainingCards;
+      updateCardDisplay();
+    }
+    
+    function markKnown(wordId, cardIndex) {
+      fetch(`/flashcards/mark-known/${wordId}`, {
+        method: 'POST',
+        headers: {
+          'X-Requested-With': 'XMLHttpRequest'
+        }
+      })
+      .then(response => response.json())
+      .then(data => {
+        if (data.status === 'success') {
+          cards = cards.filter(card => card.id !== wordId);
+          remainingCards = cards.length;
+          
+          if (remainingCards <= 0) {
+            window.location.href = "{{ url_for('flashcards.display') }}";
+            return;
+          }
+          
+          if (currentCardIndex >= remainingCards) {
+            currentCardIndex = 0;
+          }
+          
+          updateCardDisplay();
+        }
+      });
+    }
+  </script>
+{% endblock %}

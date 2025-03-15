@@ -40,5 +40,8 @@ def create_app(test_config=None):
     from . import dashboard
     app.register_blueprint(dashboard.bp)
 
+    from . import flashcards
+    app.register_blueprint(flashcards.bp)
+    
 
     return app
