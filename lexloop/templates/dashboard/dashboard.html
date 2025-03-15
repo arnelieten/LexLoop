@@ -18,6 +18,16 @@
           <tr>
             <td>{{ word['french_word'] }}</td>
             <td>{{ word['english_word'] }}</td>
+            <td>
+              <form method="POST" action="{{ url_for('dashboard.status_known', word_marker=word['dictionary_id']) }}">
+                <button type="submit">Known word</button>
+              </form>
+            </td>
+            <td>
+              <form method="POST" action="{{ url_for('dashboard.status_unknown', word_marker=word['dictionary_id']) }}">
+                <button type="submit">Unknown word</button>
+              </form>
+            </td>
           </tr>
         {% endfor %}
       </tbody>
