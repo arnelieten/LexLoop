@@ -5,8 +5,10 @@
   <h1>LexLoop</h1>
   <ul>
     {% if g.user %}
-      <li><span>{{ g.user['username'] }}</span>
-      <li><a href="{{ url_for('auth.logout') }}">Log Out</a>
+      <li><a href="{{ url_for('uploads.upload_file') }}">Upload</a></li>
+      <li><a href="{{ url_for('dashboard.display') }}">Dashboard</a></li>
+      <li><a href="{{ url_for('flashcards.display') }}">Flashcards</a></li>
+      <li><a href="{{ url_for('profile.settings') }}">My Account</a></li>
     {% else %}
       <li><a href="{{ url_for('auth.register') }}">Register</a>
       <li><a href="{{ url_for('auth.login') }}">Log In</a>

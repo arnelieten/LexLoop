@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block title %}My Account{% endblock %}
+
+{% block header %}
+    <h1>My Account</h1>
+{% endblock %}
+
+{% block content %}
+    <p>User Name: {{ g.user['username'] }}</p>
+    <p>Email: {{ g.user['email'] }}</p>
+    <br>
+    <p>Total Uploaded Words: {{ total_words }}</p>
+    <p>Known Words: {{ status_counts['known'] }}</p>
+    <p>Unknown Words: {{ status_counts['unknown'] }}</p>
+    <br>
+    <a href="{{ url_for('profile.delete_account') }} ">Delete Account</a>
+{% endblock %}

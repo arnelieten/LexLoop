@@ -42,6 +42,9 @@ def create_app(test_config=None):
 
     from . import flashcards
     app.register_blueprint(flashcards.bp)
+
+    from . import profile
+    app.register_blueprint(profile.bp)
     
 
     return app

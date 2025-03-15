@@ -96,3 +96,8 @@ def login_required(view):
         return view(**kwargs)
 
     return wrapped_view
+
+
+@bp.route('/goodbye')
+def goodbye():
+    return render_template('auth/goodbye.html')
