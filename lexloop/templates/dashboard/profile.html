@@ -15,4 +15,5 @@
     <p>Unknown Words: {{ status_counts['unknown'] }}</p>
     <br>
     <a href="{{ url_for('profile.delete_account') }} ">Delete Account</a>
+    <a href="{{ url_for('auth.logout') }} ">Log Out</a>
 {% endblock %}

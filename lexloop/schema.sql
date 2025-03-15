@@ -1,6 +1,7 @@
 DROP TABLE IF EXISTS user;
 DROP TABLE IF EXISTS dictionary;
 DROP TABLE IF EXISTS dashboard;
+DROP TABLE IF EXISTS password_reset;
 
 PRAGMA foreign_keys = ON;
 
@@ -24,6 +25,15 @@ CREATE TABLE dashboard (
   user_id INTEGER,
   dictionary_id INTEGER,
   PRIMARY KEY (user_id, dictionary_id),
-  FOREIGN KEY (user_id) REFERENCES user(id) ON DELETE CASCADE
+  FOREIGN KEY (user_id) REFERENCES user(id) ON DELETE CASCADE,
   FOREIGN KEY (dictionary_id) REFERENCES dictionary(id)
+);
+
+CREATE TABLE password_reset (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  user_id INTEGER NOT NULL,
+  token TEXT NOT NULL,
+  expires_at TIMESTAMP NOT NULL,
+  used INTEGER DEFAULT 0,
+  FOREIGN KEY (user_id) REFERENCES user(id) ON DELETE CASCADE
 );

@@ -7,7 +7,7 @@ def create_app(test_config=None):
 
     if test_config is None:
         app.config.from_pyfile('config.py')
-        print(app.config)
+        # print(app.config)
     else:
         app.config.from_mapping(test_config)
 
@@ -41,5 +41,8 @@ def create_app(test_config=None):
     from . import profile
     app.register_blueprint(profile.bp)
     
+    from . import reset
+    app.register_blueprint(reset.bp)
+    reset.init_app(app)
 
     return app
