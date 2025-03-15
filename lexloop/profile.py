@@ -51,7 +51,6 @@ def delete_account():
                 db.commit()
                 
                 session.clear()
-                flash('Your account has been deleted.')
                 return redirect(url_for('auth.goodbye'))
             except Exception as e:
                 error = f"Error deleting account: {e}"
