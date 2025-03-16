@@ -6,26 +6,19 @@
 
 {% block content %}
   {% if words %}
-    <table>
-      <thead>
-        <tr>
-          <th>French Word</th>
-          <th>English Word</th>
-        </tr>
-      </thead>
+    <table class="dashboard-table">
       <tbody>
         {% for word in words %}
-          <tr>
-            <td>{{ word['french_word'] }}</td>
-            <td>{{ word['english_word'] }}</td>
-            <td>
+          <tr class="word-row">
+            <td class="word-cell">{{ word['french_word'] }}</td>
+            <td class="button-cell">
               <form method="POST" action="{{ url_for('dashboard.status_known', word_marker=word['dictionary_id']) }}">
-                <button type="submit">Known word</button>
+                <button class="word-btn known-btn" type="submit">Got it</button>
               </form>
             </td>
-            <td>
+            <td class="button-cell">
               <form method="POST" action="{{ url_for('dashboard.status_unknown', word_marker=word['dictionary_id']) }}">
-                <button type="submit">Unknown word</button>
+                <button class="word-btn unknown-btn" type="submit">No clue</button>
               </form>
             </td>
           </tr>
@@ -33,6 +26,6 @@
       </tbody>
     </table>
   {% else %}
-    <p>No words available.</p>
+    <p class="empty-message">No words available.</p>
   {% endif %}
 {% endblock %}

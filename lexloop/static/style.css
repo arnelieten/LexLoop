@@ -361,3 +361,140 @@ input[type=submit]:hover {
 .btn:active {
   transform: translateY(0);
 }
+
+
+/* Dashboard specific styles */
+.dashboard-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.5rem 0;
+  box-shadow: 0 5px 15px rgba(40, 44, 53, 0.05);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.word-row {
+  border-bottom: 1px solid rgba(40, 44, 53, 0.1);
+  transition: background-color 0.2s ease;
+}
+
+.word-row:last-child {
+  border-bottom: none;
+}
+
+.word-row:hover {
+  background-color: #faf9f5;
+}
+
+.word-cell, .button-cell {
+  padding: 0.7rem;
+  vertical-align: middle;
+}
+
+.word-cell {
+  font-family: sans-serif;
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: #282c35;
+  width: 60%;
+}
+
+.button-cell form {
+  margin: 0;
+}
+
+.word-btn {
+  font-family: sans-serif;
+  font-size: 1rem;
+  width: 100%;
+  padding: 0.4rem 0.7rem;
+  border: none;
+  border-radius: 4px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.1s ease;
+  box-shadow: 0 2px 5px rgba(40, 44, 53, 0.1);
+}
+
+.known-btn {
+  background-color: #da7757;
+  color: white;
+}
+
+.known-btn:hover {
+  background-color: #c05e3f;
+  transform: translateY(-2px);
+}
+
+.known-btn:active {
+  transform: translateY(0);
+}
+
+.unknown-btn {
+  background-color: #da7757;
+  color: white;
+}
+
+.unknown-btn:hover {
+  background-color: #c05e3f;
+  transform: translateY(-2px);
+}
+
+.unknown-btn:active {
+  transform: translateY(0);
+}
+
+/* Empty state styling */
+.empty-message {
+  text-align: center;
+  padding: 2rem;
+  background-color: #faf9f5;
+  border-radius: 8px;
+  box-shadow: 0 5px 15px rgba(40, 44, 53, 0.1);
+  color: #282c35;
+  font-size: 1.1rem;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .word-cell {
+    font-size: 1rem;
+  }
+  
+  .word-btn {
+    padding: 0.5rem;
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .dashboard-table {
+    margin: 1rem 0;
+  }
+  
+  .word-cell, .button-cell {
+    padding: 0.75rem;
+  }
+}
+
+Copy.profile-btn {
+  display: inline-block;
+  min-width: 10em;
+  background-color: #da7757;
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  font-weight: bold;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  text-align: center;
+  margin-right: 1rem;
+  margin-bottom: 1rem;
+}
+
+.profile-btn:hover {
+  background-color: #c05e3f;
+  color: white;
+}
