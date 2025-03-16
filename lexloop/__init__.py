@@ -45,4 +45,7 @@ def create_app(test_config=None):
     app.register_blueprint(reset.bp)
     reset.init_app(app)
 
+    from . import landing
+    app.register_blueprint(landing.bp)
+
     return app
