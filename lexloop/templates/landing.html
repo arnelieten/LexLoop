@@ -3,341 +3,319 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LexLoop - Personalized French Flashcards</title>
+    <title>LexLoop</title>
     <style>
         /* Global Styles */
         :root {
-            --primary: #da7757;
-            --primary-dark: #c05e3f;
-            --dark: #282c35;
-            --light: #faf9f5;
-            --gray: rgba(40, 44, 53, 0.1);
+            --primary: #212429;
+            --secondary: #ffffff;
+            --accent: #1b9984;
+            --text: #212429;
+            --light-text: #ffffff;
+            
+            --font-small: 1rem;
+            --font-medium: 1.2rem;
+            --font-large: 2rem;
+            
+            --weight-normal: 400;
+            --weight-medium: 500;
+            --weight-bold: 700;
         }
-        
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-        
+
         html {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: var(--light);
+            font-family: sans-serif;
+            background: var(--secondary);
         }
-        
+
         body {
-            color: var(--dark);
+            color: var(--text);
             line-height: 1.6;
+            font-size: var(--font-small);
+            font-weight: var(--weight-normal);
         }
-        
+
         h1, h2, h3, h4 {
             color: var(--primary);
             margin-bottom: 1rem;
+            font-weight: var(--weight-medium);
         }
-        
+
+        h1 {
+            font-size: var(--font-large);
+            font-weight: var(--weight-bold);
+        }
+
+        h2 {
+            font-size: var(--font-large);
+        }
+
+        h3 {
+            font-size: var(--font-medium);
+        }
+
         p {
             margin-bottom: 1rem;
+            font-size: var(--font-small);
         }
-        
+
         a {
             color: var(--primary);
             text-decoration: none;
             transition: color 0.2s ease;
         }
-        
+
         a:hover {
-            color: var(--primary-dark);
+            color: var(--accent);
         }
-        
+
         .container {
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 2rem;
         }
-        
+
         .btn {
             display: inline-block;
-            background-color: var(--primary);
-            color: white;
-            padding: 0.8rem 1.8rem;
-            border-radius: 6px;
-            font-weight: 600;
-            transition: all 0.3s ease;
+            background-color: var(--accent);
+            color: var(--light-text);
+            padding: 0.4rem 1.8rem;
+            border-radius: 4px;
+            font-weight: var(--weight-bold);
+            transition: all 0.2s ease;
             border: none;
             cursor: pointer;
             text-align: center;
+            font-size: var(--font-medium);
         }
-        
+
         .btn:hover {
-            background-color: var(--primary-dark);
-            transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            background-color: var(--accent);
+            color: var(--light-text);
+            opacity: 0.9;
+            transform: translateY(-2px);
         }
-        
+
         .btn-large {
             padding: 1rem 2.5rem;
-            font-size: 1.1rem;
+            font-size: var(--font-medium);
         }
-        
+
         /* Header */
         header {
-            background-color: var(--dark);
-            color: white;
-            padding: 1rem 0;
+            background-color: var(--primary);
+            color: var(--light-text);
+            padding: 1.5rem 0;
         }
-        
+
         nav {
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
-        
+
         .logo {
-            font-size: 1.8rem;
-            font-weight: 700;
-            color: white;
+            font-size: var(--font-large);
+            font-weight: var(--weight-bold);
+            color: var(--light-text);
+            letter-spacing: 0.5px;
+            align-items: center;
         }
-        
-        .logo span {
-            color: var(--primary);
-        }
-        
+
         .nav-links {
             display: flex;
             list-style: none;
+            align-items: center;
+            font-size: var(--font-medium);
+            font-weight: var(--weight-bold);
+            letter-spacing: 0.5px;
+            align-items: center;
+            padding-top: 10px;
         }
-        
+
         .nav-links li {
-            margin-left: 2rem;
+            margin-left: 2.5rem;
         }
-        
+
         .nav-links a {
-            color: white;
+            color: var(--light-text);
         }
-        
+
         /* Hero Section */
         .hero {
-            padding: 5rem 0;
-            background: linear-gradient(135deg, var(--dark) 0%, #3a3f4b 100%);
-            color: white;
+            padding-top: 6rem;
+            padding-bottom: 8rem;
+            background-color: var(--primary);
+            color: var(--light-text);
             text-align: center;
         }
-        
+
         .hero h1 {
-            font-size: 3rem;
-            color: white;
+            color: var(--light-text);
             margin-bottom: 1.5rem;
             line-height: 1.2;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
         }
-        
-        .hero h1 span {
-            color: var(--primary);
-        }
-        
+
         .hero p {
-            font-size: 1.2rem;
-            max-width: 800px;
-            margin: 0 auto 2rem;
+            font-size: var(--font-medium);
+            max-width: 700px;
+            margin: 0 auto 2.5rem;
+            opacity: 0.9;
         }
-        
+
         /* How It Works */
         .how-it-works {
             padding: 5rem 0;
-            background-color: white;
+            background-color: var(--light-text);
         }
-        
+
         .section-title {
             text-align: center;
-            margin-bottom: 3rem;
+            margin-bottom: 3.5rem;
         }
-        
+
+        .section-title h2 {
+            position: relative;
+            display: inline-block;
+            padding-bottom: 0.5rem;
+        }
+
+        .section-title h2:after {
+            content: '';
+            position: absolute;
+            width: 80px;
+            height: 3px;
+            background-color: var(--accent);
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
         .steps {
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
             gap: 2rem;
         }
-        
+
         .step {
             flex: 1;
             min-width: 240px;
             max-width: 300px;
             padding: 2rem;
-            background-color: var(--light);
-            border-radius: 8px;
+            background-color: var(--secondary);
+            border-radius: 6px;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
             text-align: center;
             transition: transform 0.3s ease;
         }
-        
-        .step:hover {
-            transform: translateY(-10px);
+
+        .step h3 {
+            font-weight: var(--weight-bold);
         }
-        
+
+        .step:hover {
+            transform: translateY(-8px);
+        }
+
         .step-number {
             display: flex;
             justify-content: center;
             align-items: center;
             width: 50px;
             height: 50px;
-            background-color: var(--primary);
-            color: white;
-            font-size: 1.5rem;
-            font-weight: bold;
+            background-color: var(--accent);
+            color: var(--light-text);
+            font-size: var(--font-medium);
+            font-weight: var(--weight-medium);
             border-radius: 50%;
             margin: 0 auto 1.5rem;
         }
-        
+
         /* Benefits */
         .benefits {
             padding: 5rem 0;
-            background-color: var(--light);
+            background-color: var(--secondary);
         }
-        
+
         .benefits-grid {
             display: flex;
             flex-wrap: wrap;
             gap: 2rem;
             justify-content: center;
         }
-        
+
         .benefit {
             flex: 1;
             min-width: 300px;
-            background-color: white;
-            padding: 2rem;
-            border-radius: 8px;
+            background-color: var(--light-text);
+            padding: 2.5rem;
+            border-radius: 6px;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
             transition: all 0.3s ease;
+            border-top: 3px solid transparent;
         }
-        
+
         .benefit:hover {
-            transform: scale(1.03);
+            transform: translateY(-5px);
+            border-top: 3px solid var(--accent);
         }
-        
+
         .benefit h3 {
             display: flex;
             align-items: center;
-            gap: 0.5rem;
+            gap: 0.8rem;
+            margin-bottom: 1.2rem;
+            color: var(--primary);
+            font-weight: var(--weight-bold);
         }
-        
+
         .benefit-icon {
-            font-size: 1.5rem;
-            color: var(--primary);
+            font-size: var(--font-medium);
+            color: var(--accent);
         }
-        
-        /* CTA Section */
-        .cta {
-            padding: 5rem 0;
-            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
-            color: white;
-            text-align: center;
-        }
-        
-        .cta h2 {
-            color: white;
-            font-size: 2.5rem;
-            margin-bottom: 1.5rem;
-        }
-        
-        .cta .btn {
-            background-color: white;
-            color: var(--primary);
-        }
-        
-        .cta .btn:hover {
-            background-color: var(--light);
-            color: var(--primary-dark);
-        }
-        
-        /* Flashcard Demo */
-        .flashcard-demo {
-            padding: 5rem 0;
-            background-color: white;
-        }
-        
-        .flashcard-container {
-            max-width: 500px;
-            height: 300px;
-            margin: 0 auto;
-            perspective: 1000px;
-        }
-        
-        .flashcard {
-            width: 100%;
-            height: 100%;
-            position: relative;
-            transition: transform 0.8s;
-            transform-style: preserve-3d;
-            cursor: pointer;
-        }
-        
-        .flashcard.flipped {
-            transform: rotateY(180deg);
-        }
-        
-        .flashcard-front, .flashcard-back {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            backface-visibility: hidden;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            border-radius: 10px;
-            padding: 2rem;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-        }
-        
-        .flashcard-front {
-            background-color: var(--light);
-        }
-        
-        .flashcard-back {
-            background-color: var(--dark);
-            color: white;
-            transform: rotateY(180deg);
-        }
-        
-        .card-word {
-            font-size: 2.5rem;
-            font-weight: bold;
-        }
-        
-        .card-instruction {
-            position: absolute;
-            bottom: 20px;
-            font-size: 0.9rem;
-            opacity: 0.7;
-        }
-        
+
         /* Footer */
         footer {
-            background-color: var(--dark);
-            color: white;
-            padding: 3rem 0;
+            background-color: var(--primary);
+            color: var(--light-text);
+            padding: 2rem 0;
             text-align: center;
         }
-        
+
         .footer-links {
             display: flex;
             justify-content: center;
             list-style: none;
             margin: 1.5rem 0;
         }
-        
+
         .footer-links li {
-            margin: 0 1rem;
+            margin: 0 1.5rem;
         }
-        
+
         .footer-links a {
-            color: var(--light);
+            color: var(--light-text);
+            opacity: 0.9;
         }
-        
+
+        .footer-links a:hover {
+            opacity: 1;
+            text-decoration: underline;
+        }
+
         /* Responsive */
         @media (max-width: 768px) {
             .hero h1 {
-                font-size: 2.2rem;
+                font-size: var(--font-large);
             }
             
             .steps, .benefits-grid {
@@ -349,6 +327,10 @@
                 width: 100%;
                 max-width: 400px;
             }
+            
+            .nav-links li {
+                margin-left: 1.5rem;
+            }
         }
     </style>
 </head>
@@ -357,10 +339,10 @@
     <header>
         <div class="container">
             <nav>
-                <div class="logo">Lex<span>Loop</span></div>
+                <div class="logo">LexLoop</div>
                 <ul class="nav-links">
-                    <li><a href="#how-it-works">How It Works</a></li>
-                    <li><a href="#benefits">Benefits</a></li>
+                    <li><a href="#benefits">Why LexLoop</a></li>
+                    <li><a href="#how-it-works">How it Works</a></li>
                     <li><a href="{{ url_for('auth.register') }}" class="btn">Sign Up</a></li>
                 </ul>
             </nav>
@@ -370,9 +352,39 @@
     <!-- Hero Section -->
     <section class="hero">
         <div class="container">
-            <h1>Turn Any French Text into <span>Personalized Flashcards</span></h1>
-            <p>Learn French vocabulary smarter with LexLoop. Upload your French PDFs and instantly create customized flashcards tailored to your learning needs.</p>
-            <a href="{{ url_for('auth.register') }}" class="btn btn-large">Get Started – It's Free</a>
+            <br>
+            <br>
+            <h1>Transform any French document into personalized flashcards</h1>
+            <p>Accelerate your French learning with LexLoop. Upload any document and instantly generate customized flashcards!</p>
+            <br>
+            <br>
+            <a href="{{ url_for('auth.register') }}" class="btn btn-large">Let's Go - Free!</a>
+        </div>
+    </section>
+
+    <!-- Benefits -->
+    <section class="benefits" id="benefits">
+        <div class="container">
+            <div class="section-title">
+                <h2>Why LexLoop</h2>
+            </div>
+            
+            <div class="benefits-grid">
+                <div class="benefit">
+                    <h3><span class="benefit-icon">⏱️</span> Saves Time</h3>
+                    <p>Skip manual word lookups and flashcard creation. Simply upload your document and start learning instantly!</p>
+                </div>
+                
+                <div class="benefit">
+                    <h3><span class="benefit-icon">🎯</span> Personalized Learning</h3>
+                    <p>Focus on words that matter to you. Build a personalized learning path based on your documents.</p>
+                </div>
+                
+                <div class="benefit">
+                    <h3><span class="benefit-icon">💰</span> Free of Charge</h3>
+                    <p>Free flashcards for everybody! created by language learners, for language learners.</p>
+                </div>
+            </div>
         </div>
     </section>
     
@@ -380,106 +392,41 @@
     <section class="how-it-works" id="how-it-works">
         <div class="container">
             <div class="section-title">
-                <h2>How LexLoop Works</h2>
-                <p>Four simple steps to accelerate your French vocabulary learning</p>
+                <h2>How it Works</h2>
             </div>
             
             <div class="steps">
                 <div class="step">
                     <div class="step-number">1</div>
-                    <h3>Upload Your PDF</h3>
-                    <p>Simply upload any French text or PDF. Our system will extract all vocabulary words automatically.</p>
+                    <h3>Upload</h3>
+                    <p>Upload your French documents. The model will extract every word and translate it.</p>
                 </div>
                 
                 <div class="step">
                     <div class="step-number">2</div>
-                    <h3>Sort Your Words</h3>
-                    <p>Head to your dashboard to mark the words you already know—no need to study what you've mastered.</p>
+                    <h3>Track</h3>
+                    <p>Head to your dashboard to mark the words you already know. No need to study what you've already mastered.</p>
                 </div>
                 
                 <div class="step">
                     <div class="step-number">3</div>
-                    <h3>Learn with Flashcards</h3>
-                    <p>Jump into the flashcard section and focus only on the words you need to learn.</p>
+                    <h3>Learn</h3>
+                    <p>Jump into flashcards and focus on the words you still need to learn.</p>
                 </div>
                 
                 <div class="step">
                     <div class="step-number">4</div>
-                    <h3>Keep Growing</h3>
-                    <p>Upload your next document and we'll filter out words you've already learned, so you're always progressing.</p>
+                    <h3>Loop</h3>
+                    <p>Keep the loop going. Upload your next documents, and we'll filter out the words you've already learned!</p>
                 </div>
             </div>
-        </div>
-    </section>
-    
-    <!-- Flashcard Demo -->
-    <section class="flashcard-demo">
-        <div class="container">
-            <div class="section-title">
-                <h2>Try It Out</h2>
-                <p>Click on the flashcard below to see how it works</p>
-            </div>
-            
-            <div class="flashcard-container">
-                <div class="flashcard" onclick="this.classList.toggle('flipped')">
-                    <div class="flashcard-front">
-                        <div class="card-word">apprentissage</div>
-                        <div class="card-instruction">(Click to flip)</div>
-                    </div>
-                    <div class="flashcard-back">
-                        <div class="card-word">learning</div>
-                        <div class="card-instruction">(Click to return)</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    
-    <!-- Benefits -->
-    <section class="benefits" id="benefits">
-        <div class="container">
-            <div class="section-title">
-                <h2>Why Choose LexLoop</h2>
-                <p>Learning French vocabulary has never been this efficient</p>
-            </div>
-            
-            <div class="benefits-grid">
-                <div class="benefit">
-                    <h3><span class="benefit-icon">⏱️</span> Saves Time</h3>
-                    <p>No more manual word lookups or creating flashcards by hand. Just upload your text and start learning immediately.</p>
-                </div>
-                
-                <div class="benefit">
-                    <h3><span class="benefit-icon">🎯</span> Personalized Learning</h3>
-                    <p>Focus only on vocabulary that matters to you. Build a personalized learning path based on your unique reading materials.</p>
-                </div>
-                
-                <div class="benefit">
-                    <h3><span class="benefit-icon">💰</span> No Payment Required</h3>
-                    <p>Get started for free with no credit card needed. All features are available to help boost your French vocabulary learning.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-    
-    <!-- CTA Section -->
-    <section class="cta">
-        <div class="container">
-            <h2>Ready to Learn French Smarter?</h2>
-            <p>Join thousands of language learners who are accelerating their vocabulary acquisition with LexLoop.</p>
-            <a href="{{ url_for('auth.register') }}" class="btn btn-large">Create Free Account</a>
         </div>
     </section>
     
     <!-- Footer -->
     <footer>
         <div class="container">
-            <div class="logo">Lex<span>Loop</span></div>
-            <ul class="footer-links">
-                <li><a href="{{ url_for('auth.login') }}">Login</a></li>
-                <li><a href="{{ url_for('auth.register') }}">Register</a></li>
-            </ul>
-            <p>&copy; 2025 LexLoop. Learn smarter, not harder.</p>
+            <p>Copyright &copy; LexLoop 2025. All rights reserved.</p>
         </div>
     </footer>
 </body>
