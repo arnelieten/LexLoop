@@ -13,12 +13,12 @@
             <td class="word-cell">{{ word['french_word'] }}</td>
             <td class="button-cell">
               <form method="POST" action="{{ url_for('dashboard.status_known', word_marker=word['dictionary_id']) }}">
-                <button class="word-btn known-btn" type="submit">Got it</button>
+                <button class="word-btn known-btn" type="submit" title="Word will not show up in flashcards">✓</button>
               </form>
             </td>
             <td class="button-cell">
               <form method="POST" action="{{ url_for('dashboard.status_unknown', word_marker=word['dictionary_id']) }}">
-                <button class="word-btn unknown-btn" type="submit">No clue</button>
+                <button class="word-btn unknown-btn" type="submit" title="Word will be sent to flashcards">?</button>
               </form>
             </td>
           </tr>
@@ -26,6 +26,6 @@
       </tbody>
     </table>
   {% else %}
-    <p class="empty-message">No words available.</p>
+    <p class="empty-message">No words available. Upload a french document first.</p>
   {% endif %}
 {% endblock %}

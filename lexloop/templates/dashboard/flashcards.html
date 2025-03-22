@@ -15,7 +15,7 @@
             <div class="flashcard-inner">
 
               <div class="flashcard-front">
-                <button class="mark-known-btn" onclick="markKnown({{ word.id }}, {{ loop.index0 }})">✓</button>
+                <button class="mark-known-btn" onclick="markKnown({{ word.id }}, {{ loop.index0 }})" title="Word will be removed from flashcards">✓</button>
                 <div class="word french-word">{{ word.french_word }}</div>
                 <div class="navigation-controls">
                   <button class="nav-btn prev-btn" onclick="prevCard()">←</button>
@@ -25,7 +25,7 @@
               </div>
 
               <div class="flashcard-back">
-                <button class="mark-known-btn" onclick="markKnown({{ word.id }}, {{ loop.index0 }})">✓</button>
+                <button class="mark-known-btn" onclick="markKnown({{ word.id }}, {{ loop.index0 }})" title="Word will be removed from flashcards">✓</button>
                 <div class="word english-word">{{ word.english_word }}</div>
                 <div class="navigation-controls">
                   <button class="nav-btn prev-btn" onclick="prevCard()">←</button>

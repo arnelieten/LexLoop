@@ -7,12 +7,13 @@
 {% endblock %}
 
 {% block content %}
-    <p>User Name: {{ g.user['username'] }}</p>
-    <p>Email: {{ g.user['email'] }}</p>
+    <p class="profile-info">User Name: <span class="profile-value">{{ g.user['username'] }}</span></p>
+    <p class="profile-info">Email: <span class="profile-value">{{ g.user['email'] }}</span></p>
     <br>
-    <p>Total Uploaded Words: {{ total_words }}</p>
-    <p>Known Words: {{ status_counts['known'] }}</p>
-    <p>Unknown Words: {{ status_counts['unknown'] }}</p>
+    <p class="profile-info">Words Total: <span class="profile-value">{{ total_words}}</span></p>
+    <p class="profile-info">Words Learned: <span class="profile-value">{{ status_counts['known'] }}</span></p>
+    <p class="profile-info">Words in Flashcards: <span class="profile-value">{{ status_counts['unknown'] }}</span></p>
+    <p class="profile-info">Words in Dashboard: <span class="profile-value">{{ status_counts['new'] }}</span></p>
     <br>
     <a class='known-btn profile-btn' href="{{ url_for('profile.delete_account') }} ">Delete Account</a>
     <a class='known-btn profile-btn' href="{{ url_for('auth.logout') }} ">Log Out</a>
