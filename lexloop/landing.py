@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, session, url_for, redirect, request, jsonify
+from flask import Blueprint, render_template
 
 bp = Blueprint('landing', __name__, url_prefix='/landing')
 

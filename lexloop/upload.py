@@ -1,5 +1,5 @@
 import os
-from flask import Flask, flash, request, redirect, url_for, Blueprint, current_app, render_template, send_from_directory
+from flask import flash, request, redirect, url_for, Blueprint, current_app, render_template
 from werkzeug.utils import secure_filename
 from lexloop.auth import login_required
 
