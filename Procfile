@@ -1,1 +1,0 @@
-gunicorn "lexloop:create_app()"
